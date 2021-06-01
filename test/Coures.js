@@ -42,5 +42,15 @@ contract("Course", ([deployer, author, tipper]) => {
       assert.equal(mintEventResult.tokenId, 1);
       assert.equal(mintEventResult.to, deployer);
     });
+
+    it("Check owners mapping", async () => {
+      let owner = await masterContractInstance._owners(1);
+      assert.equal(owner, deployer);
+    });
+
+    it("OwnerOf function", async () => {
+      let owner = await masterContractInstance.ownerOf(1);
+      assert.equal(owner, deployer);
+    });
   });
 });

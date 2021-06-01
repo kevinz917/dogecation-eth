@@ -8,7 +8,9 @@ contract Course {
   // courses
   mapping(address => string[]) credentials;
 
-  mapping(uint256 => address) _owners;
+  mapping(uint256 => address) public _owners;
+
+  mapping(address => uint256) public _balance;
 
   uint256 public _tokenCount;
 
@@ -27,6 +29,17 @@ contract Course {
   modifier onlyAdmin() {
     require(msg.sender == admin);
     _;
+  }
+
+  function ownerOf(uint256 tokenId) external view returns (address) {
+    address owner = _owners[tokenId];
+    return owner;
+  }
+
+
+  function balanceOf(address owner) external view returns(uint256) {
+    uint256 balance = balanceOf[owner]
+    return balance
   }
 
   function addTokenTo(address to, uint256 tokenId) private {
